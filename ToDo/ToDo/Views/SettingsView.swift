@@ -24,6 +24,24 @@ struct SettingsView: View {
                 Toggle("Hide completed tasks", isOn: $hideCompletedTasks).onReceive([self.hideCompletedTasks].publisher.first()) { (value) in
                     UserDefaults.standard.set(value, forKey: Keys.hideCompletedTasksKey)
                 }
+                
+                Button {
+                    FirebaseManager.shared.logoutUser { (success, error) in
+                        guard error == nil else {
+                            return
+                        }
+                        print("Came Here")
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("Sign Out")
+                            .foregroundColor(.red)
+                        Spacer()
+                    }
+                }
+
             }.navigationBarTitle("Settings")
                 .navigationBarItems(trailing: Button(action: {
                     self.presentationMode.wrappedValue.dismiss()

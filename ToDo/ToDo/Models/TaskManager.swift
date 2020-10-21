@@ -10,52 +10,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-class Task: Codable, ObservableObject {
-    
-    
-    var id: String
-    var taskName: String
-    var priority: String
-    var completed: Bool
-    
-    var reminderEnabled: Bool = false
-    var reminderDisabled: Bool = true
-    var reminderDate: Date = Date()
-    
-    var backgroundColor: Color {
-        priority == "High" ? Color.red : (priority == "Normal" ? Color.orange : Color.green)
-    }
-    
-    //    enum CodingKeys: CodingKey {
-    //        case id, taskName, priority, completed
-    //    }
-    //
-    //    required init(from decoder: Decoder) throws {
-    //        let container = try decoder.container(keyedBy: CodingKeys.self)
-    //        id = try container.decode(String.self, forKey: .id)
-    //        taskName = try container.decode(String.self, forKey: .taskName)
-    //        priority = try container.decode(String.self, forKey: .priority)
-    //        completed = try container.decode(Bool.self, forKey: .completed)
-    //    }
-    //
-    //    func encode(to encoder: Encoder) throws {
-    //        var container =  encoder.container(keyedBy: CodingKeys.self)
-    //        try container.encode(id, forKey: .id)
-    //        try container.encode(taskName, forKey: .taskName)
-    //        try container.encode(priority, forKey: .priority)
-    //        try container.encode(completed, forKey: .completed)
-    //    }
-    
-    init(taskName: String, priority: String) {
-        self.id = UUID().uuidString
-        self.taskName = taskName
-        self.priority = priority
-        self.completed = false
-    }
-    
-    
-    
-}
+
 
 class TaskManager: ObservableObject {
     

@@ -9,14 +9,12 @@
 import SwiftUI
 
 struct AddButton: View {
-    
-    @Binding var showSheet: Bool
-    @Binding var currentSheet: CurrentSheet
+
+    var homeViewModel: HomeViewModel
     
     var body: some View {
         Button(action: {
-            self.showSheet.toggle()
-            self.currentSheet = .addNewTask
+            self.homeViewModel.setShowSheet(sheet: .addNewTask)
         }) {
             Image(systemName: "plus")
                 .font(.system(size: 30))

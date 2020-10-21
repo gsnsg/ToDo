@@ -11,39 +11,38 @@ import UserNotifications
 
 struct TaskView: View {
     
-    @EnvironmentObject var taskManager: TaskManager
     
-    @State var task: Task
+    
+    @StateObject var taskViewModel: TaskViewModel
     
     var body: some View {
         Button(action: {
             withAnimation {
-                self.task.completed.toggle()
-                self.taskManager.saveTasks()
+                self.taskViewModel.toggleTask()
             }
             
         }) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Image(systemName: task.completed ? "checkmark.circle.fill" : "circle")
+                Image(systemName: taskViewModel.task.completed ? "checkmark.circle.fill" : "circle")
                     .font(.system(size: 20))
-                    .foregroundColor(task.completed ? .purple : .secondary)
-                Text(task.taskName)
+                    .foregroundColor(taskViewModel.task.completed ? .purple : .secondary)
+                Text(taskViewModel.task.taskName)
                     .font(.system(size: 20))
-                    .strikethrough(task.completed)
-                    .foregroundColor(task.completed ? .secondary : .primary)
+                    .strikethrough(taskViewModel.task.completed)
+                    .foregroundColor(taskViewModel.task.completed ? .secondary : .primary)
                 Spacer()
-                Image(systemName: "circle").background(task.backgroundColor).clipShape(Circle())
+                Image(systemName: "circle")
+                    .foregroundColor(.white)
+                    .background(taskViewModel.task.backgroundColor).clipShape(Circle())
+                    
             }
         }
         .padding(12)
         .contextMenu {
             
-            if task.reminderEnabled {
+            if taskViewModel.task.reminderEnabled {
                 Button(action: {
-                    self.task.reminderEnabled = false
-                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [self.task.id])
-                    print("Deleted Notification for task: \(self.task.id)")
-                    self.taskManager.saveTasks()
+                    self.taskViewModel.disableReminder()
                 }) {
                     HStack {
                         Image(systemName: "bell")
@@ -54,7 +53,7 @@ struct TaskView: View {
             }
             
             Button(action: {
-                self.taskManager.deleteTask(for: self.task.id)
+                self.taskViewModel.deleteTask()
             }) {
                 HStack {
                     Text("Delete Task")
