@@ -22,4 +22,4 @@ Notification
 
 
 
-<b>Login Display Image credits <a href="http://www.freepik.com">Designed by pch.vector / Freepik</a> <b> 
+<b>Login Display Image credits: <a href="http://www.freepik.com">Designed by pch.vector / Freepik</a> <b> 
