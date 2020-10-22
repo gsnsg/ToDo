@@ -15,7 +15,7 @@ SignUp View |        Home View
 
 Notification   
 :-------------------------:
-<img src="images/sc_3.png" width="280" height="570"/> 
+<img src="images/sc_6.png" width="280" height="570"/> 
 
 
 
